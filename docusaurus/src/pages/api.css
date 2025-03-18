@@ -1,0 +1,9 @@
+.api-page {
+  background-color: #ffffff; /* Light mode default */
+}
+
+@media (prefers-color-scheme: dark) {
+  .api-page {
+    background-color: #1f2937; /* Tailwind gray-800 */
+  }
+}

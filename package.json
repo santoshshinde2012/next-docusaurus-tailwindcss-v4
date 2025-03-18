@@ -4,24 +4,34 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev:docs": "cd docusaurus && npm run start",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:docs\"",
+    "build": "npm run build:docs && next build",
+    "build:docs": "ts-node scripts/build-docs.ts",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "next": "15.2.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.2.2"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@docusaurus/tsconfig": "^3.7.0",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.1.2",
     "eslint": "^9",
     "eslint-config-next": "15.2.2",
-    "@eslint/eslintrc": "^3"
+    "fs-extra": "^11.2.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
   }
 }

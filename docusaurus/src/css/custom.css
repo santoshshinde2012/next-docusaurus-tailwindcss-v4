@@ -1,0 +1,67 @@
+@import "tailwindcss";
+@layer theme, base, components, utilities;
+
+@layer base {
+  :root {
+    all: initial;
+    font-family: inherit;
+    box-sizing: border-box;
+  }
+}
+
+:root {
+  --ifm-color-primary: #2e8555; /* Green for light mode */
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-heading-color: #2e8555; /* Green for light mode */
+  --ifm-heading-color-dark: #2e8555; /* Green for dark mode */
+  --ifm-link-color: #2e8555; /* Green for light mode */
+  --ifm-link-color-dark: #2e8555; /* Green for dark mode */
+  --ifm-link-hover-color: #2e8555; /* Green for light mode */
+  --ifm-link-hover-color-dark: #2e8555; /* Green for dark mode */
+  --ifm-color-emphasis-100: #2e8555; /* Green for light mode */
+  --ifm-color-emphasis-100-dark: #2e8555; /* Green for dark mode */
+  --ifm-color-emphasis-200: #2e8555; /* Green for light mode */
+  --ifm-color-emphasis-200-dark: #2e8555; /* Green for dark mode */
+  --ifm-color-emphasis-300: #2e8555; /* Green for light mode */
+  --ifm-color-emphasis-300-dark: #2e8555; /* Green for dark mode */
+  --ifm-color-emphasis-400: #2e85
+}
+
+[data-theme="dark"] {
+  --ifm-color-primary: #25c2a0; /* Lighter green for dark mode */
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3); /* Darker background for dark mode */  
+}
+
+.navbar {
+  height: 82px; /* Desktop default */
+}
+
+@media (max-width: 996px) {
+  /* Docusaurus mobile breakpoint */
+  .navbar {
+    height: 64px; /* Mobile default */
+  }
+}
+
+.navbar__inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.docs-wrapper footer {
+  display: none;
+}
