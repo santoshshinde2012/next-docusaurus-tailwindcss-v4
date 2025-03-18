@@ -24,137 +24,127 @@ git clone <repository-url>
 cd <repository-name>
 ```
 
-2. Install dependencies for the Next.js application:
+2. Install dependencies:
 
 ```bash
+# Install Next.js dependencies
 npm install
-```
 
-3. Install dependencies for the Docusaurus project:
-
-```bash
+# Install Docusaurus dependencies
 cd docusaurus
 npm install
 cd ..
 ```
 
-## Development
+## Quick Start (Automated Setup)
 
-### Running Next.js Only
+We provide several options to set up and run the project with a single command:
 
-To run only the Next.js application in development mode:
+### Option 1: Using the TypeScript setup script
 
 ```bash
+# Full setup: install dependencies, build both projects, and start the server
+npm run setup:full
+
+# Setup without rebuilding (if you've already built the project)
+npm run setup
+```
+
+### Option 2: Using the shell script
+
+```bash
+# Make the script executable
+chmod +x scripts/setup.sh
+
+# Run the setup script
+./scripts/setup.sh
+```
+
+### Option 3: Using npm scripts
+
+```bash
+# Build both projects and start the server
+npm run run:all
+```
+
+After running any of these commands, your application will be available at http://localhost:3000 with the documentation accessible at http://localhost:3000/docs.
+
+## Manual Development
+
+If you prefer to run the components separately:
+
+### Next.js Application
+
+```bash
+# Start the Next.js development server
 npm run dev
 ```
 
-This will start the Next.js development server at http://localhost:3000.
-
-### Running Docusaurus Only
-
-To run only the Docusaurus site in development mode:
+### Docusaurus Documentation
 
 ```bash
+# Start the Docusaurus development server
 npm run dev:docs
 ```
 
-This will start the Docusaurus development server at http://localhost:3000.
-
-### Running Both Together
-
-To run both the Next.js application and Docusaurus site simultaneously:
+### Run Both Simultaneously
 
 ```bash
+# Run both Next.js and Docusaurus in development mode
 npm run dev:all
 ```
 
-This will start:
-- Next.js development server at http://localhost:3000
-- Docusaurus development server at http://localhost:3000
-
-**Note**: When running both servers simultaneously, you'll need to access them at their respective URLs. The Docusaurus site will be available at its own development server, not under the `/docs` path of the Next.js application during development.
-
 ## Building for Production
 
-To build both the Docusaurus site and Next.js application for production:
+### Build Everything
 
 ```bash
+# Build both Docusaurus and Next.js
+npm run build:all
+```
+
+### Build Individual Components
+
+```bash
+# Build only Docusaurus
+npm run build:docs
+
+# Build only Next.js (includes Docusaurus if already built)
 npm run build
 ```
 
-This will:
-1. Build the Docusaurus site
-2. Copy the built Docusaurus site to `/public/docs`
-3. Build the Next.js application
+## Serving the Production Build
 
-## Running in Production
-
-To run the production build:
+After building the project, you can serve it with:
 
 ```bash
 npm run start
 ```
 
-This will start the Next.js production server. The Docusaurus site will be available at the `/docs` path of your application.
+## Project Structure Details
 
-## How the Integration Works
-
-1. **Development**: During development, the Docusaurus site and Next.js application run as separate servers.
-
-2. **Production**: For production:
-   - The Docusaurus site is built and its output is copied to `/public/docs`
-   - Next.js serves these static files when users access the `/docs` path
-   - The `baseUrl` in the Docusaurus configuration is set to `/docs/` to ensure all internal links work correctly
-
-3. **Navigation**: The Next.js application includes links to the Docusaurus documentation, providing a seamless experience for users.
-
-## Customization
-
-### Docusaurus Configuration
-
-The Docusaurus configuration is in `/docusaurus/docusaurus.config.ts`. Key settings for the integration:
-
-```typescript
-const config: Config = {
-  // ...
-  baseUrl: '/docs/',
-  // ...
-};
-```
-
-### Next.js Configuration
-
-The Next.js configuration is in `/next.config.ts`. The rewrites configuration ensures that requests to `/docs/*` are handled correctly:
-
-```typescript
-const nextConfig: NextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: '/docs/:path*',
-        destination: '/docs/:path*',
-      },
-    ];
-  },
-  // ...
-};
-```
+- **Next.js Application**: The main application that serves as the primary entry point.
+- **Docusaurus Documentation**: Integrated documentation system served under the `/docs` route.
+- **Integration**: The build process automatically builds the Docusaurus site and places it in the Next.js public folder, allowing Next.js to serve it statically.
 
 ## Troubleshooting
 
-### Missing Dependencies
+### Documentation Not Loading
 
-If you encounter errors about missing dependencies, ensure you've run `npm install` in both the root directory and the `/docusaurus` directory.
+If the documentation is not loading at the `/docs` route:
 
-### Path Issues
-
-If links within the Docusaurus site don't work correctly in production, check that:
-- The `baseUrl` in `docusaurus.config.ts` is set to `/docs/`
-- Internal links in your Docusaurus content use relative paths or start with `/docs/`
+1. Make sure you've built the project using one of the build commands
+2. Check that the Docusaurus build files were properly copied to the `public/docs` directory
+3. Verify that there are no errors in the browser console
 
 ### Build Errors
 
-If you encounter errors during the build process:
-1. Try building the Docusaurus site separately: `cd docusaurus && npm run build`
-2. Check the console output for specific error messages
-3. Ensure all required dependencies are installed
+If you encounter build errors:
+
+1. Make sure all dependencies are installed for both projects
+2. Clear the `.next` and `docusaurus/build` directories and try building again
+3. Check the console output for specific error messages
+
+## License
+
+[MIT](LICENSE)

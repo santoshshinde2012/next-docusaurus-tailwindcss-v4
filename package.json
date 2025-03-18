@@ -5,9 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev:docs": "cd docusaurus && npm run start",
-    "dev:all": "concurrently \"npm run dev\" \"npm run dev:docs\"",
-    "build": "npm run build:docs && next build",
-    "build:docs": "ts-node scripts/build-docs.ts",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },

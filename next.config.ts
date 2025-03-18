@@ -1,7 +1,9 @@
-import type { NextConfig } from 'next';
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Ensure Next.js doesn't process the /docs path and lets the static files be served
+  reactStrictMode: true,
+  output: 'standalone',
+  
   async rewrites() {
     return [
       {
@@ -10,12 +12,30 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  // Add types for TypeScript
-  typescript: {
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    ignoreBuildErrors: true,
+
+  // Type-safe headers configuration
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+        ],
+      },
+    ];
   },
 };
 
 export default nextConfig;
+
